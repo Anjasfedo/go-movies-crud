@@ -12,18 +12,24 @@ import (
 )
 
 type Movie struct {
-	ID       string    `json: "id"`
-	isbn     string    `json: "isbn"`
-	title    string    `json: "title"`
-	Director *Director `json: "director"`
+	ID       string    `json:"id"`
+	isbn     string    `json:"isbn"`
+	title    string    `json:"title"`
+	Director *Director `json:"director"`
 }
 
 type Director struct {
-	FirstName string `json: "firstName`
-	LastName  string `json: "lastName"`
+	FirstName string `json:"firstName`
+	LastName  string `json:"lastName"`
 }
 
 var movies []Movie
+
+func getMovies(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	json.NewEncoder(w).Encode(movies)
+}
 
 func main() {
 	r := mux.NewRouter()

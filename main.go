@@ -94,6 +94,7 @@ func updateMovie(w http.ResponseWriter, r *http.Request) {
 			movies = append(movies, movie)
 
 			json.NewEncoder(w).Encode(movie)
+			return
 		}
 	}
 }
@@ -114,7 +115,7 @@ func main() {
 
 	r.HandleFunc("/movies/{id}", deleteMovie).Methods("DELETE")
 
-	fmt.Printf("Starting Server on Port 8000/n")
+	fmt.Printf("Starting Server on Port 8000\n")
 
 	log.Fatal(http.ListenAndServe(":8000", r))
 
